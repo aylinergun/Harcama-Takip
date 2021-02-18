@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Controllers\HomeController;
+use Controllers\CategoryController;
+use Controllers\ExpenditureController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
+Route::get('/expenditure', [App\Http\Controllers\ExpenditureController::class, 'index'])->name('create');
+
+Auth::routes();
+
+Route::get('/categories','App\Http\Controllers\CategoryController@index');
+
+
+Route::resource('expenditures','App\Http\Controllers\ExpenditureController');
+
+//Route::post('/expenditures/create','App\Http\Controllers\ExpenditureController@store');
