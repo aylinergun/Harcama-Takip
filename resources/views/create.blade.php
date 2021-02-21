@@ -10,10 +10,14 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-  <div align="right">
-    <strong><a href="{{route('create')}}">Geri Dön</a></strong>
-  </div>
+  <div style="background-color:lightblue">
+         @foreach ($errors->all() as $error)
+           <li>{{$error}}</li>
+         @endforeach
+     </div>
+
   <form method="post" action="{{url('/expenditures')}}" enctype="multipart/form-data">
+
     {{csrf_field()}}
 
     <div class="container">
@@ -24,21 +28,21 @@
       <label for="total">Toplam Tutar:</label>
       <input type="text" name="total" id="total" class="form-group" required>
     </div>
-<!--
-    <div class="form-group">
-      <label for="category">Kategori:</label>
-      <input type="text" name="category" id="category_id" class="form-group">
-    </div>
--->
-    <div>
-      <label for="date">Harcama Tarihi:</label>
-      <input type="date" name="date" id="date" class="form-group" required>
-    </div>
-
     <div class="form-group">
       <label for="location">Harcama Yeri:</label>
       <input type="text" name="location" id="location" class="form-group">
     </div>
-
+    <label >Kategori :</label>
+    <select name="category_id">
+      <option value="" required>Seçim Yapınız</option>
+      @foreach ($categories as $category)
+        <option value="{{$category->id}}">{{$category->category_name}}</option>
+      @endforeach
+    </select>
+    <div>
+      <br>
+      <label for="date">Harcama Tarihi:</label>
+      <input type="date" name="date" id="date" class="form-group" required>
+    </div>
     <button type="submit" class="btn btn-primary btn-success">Gönder</button>
   </div>

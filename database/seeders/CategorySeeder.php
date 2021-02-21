@@ -15,13 +15,18 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = [
-          [
-              'id'=> 1,
-              'category_name' => 'Kira',
-        ],
-      ];
+         $categorySeed = [
+          [  'category_name'=>' Vergi'],
+          [  'category_name'=>'Banka'],
+          [  'category_name'=>'Fatura'],
+          [  'category_name'=>'Alışveriş'],
+          [  'category_name'=>'Faiz'],
+        ];
 
-        Category::insert($categories);
+        Category::create($categories);
+
+        foreach ($categorySeed as $seed) {
+          Category::create($seed);
+        }
+      }
     }
-}
