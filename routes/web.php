@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Controllers\HomeController;
-use Controllers\CategoryController;
 use Controllers\ExpenditureController;
 
 
@@ -17,16 +16,11 @@ use Controllers\ExpenditureController;
 |
 */
 
+Route::get('/','App\Http\Controllers\HomeController@index');
 
-
-
-Route::get('/expenditure', [App\Http\Controllers\ExpenditureController::class, 'index'])->name('create');
 
 Auth::routes();
 
-Route::get('/categories','App\Http\Controllers\CategoryController@index');
-
+Route::get('/liste','App\Http\Controllers\ExpenditureController@create');
 
 Route::resource('expenditures','App\Http\Controllers\ExpenditureController');
-
-//Route::post('/expenditures/create','App\Http\Controllers\ExpenditureController@store');
