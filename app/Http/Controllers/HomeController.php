@@ -9,12 +9,16 @@ use App\Models\Expenditure;
 
 class HomeController extends Controller
   {
-    public function __construct(){
-      $this->middleware('auth');
-  }
+  //    public function __construct(){
+    //   $this->middleware('auth');
+  //}
 
-     public function index(){
-          $expenditures=Expenditure::all();
-          return view('create',compact('expenditures'));
-      }
+     public function index()
+     {
+          $categories=Category::all();
+          $expenditures=Expenditure::with('Category');
+
+          return view('create')->with(compact('categories', 'expenditures'));
+  }
 }
+?>

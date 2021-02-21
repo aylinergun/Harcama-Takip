@@ -16,8 +16,7 @@ class ExpenditureController extends Controller
      */
     public function index()
     {
-        $expenditures=Expenditure::all();
-        return view('create')->with(compact('expenditures'));
+        //
     }
 
     /**
@@ -27,8 +26,10 @@ class ExpenditureController extends Controller
      */
     public function create()
     {
-        return view('create');
-    }
+      $expenditures=Expenditure::all();
+      return view('home')->with(compact('expenditures'));
+
+         }
 
     /**
      * Store a newly created resource in storage.
@@ -40,24 +41,22 @@ class ExpenditureController extends Controller
     {
         $this->validate($request, [
           'total'=> 'required|numeric',
+          'category_id'=>'required|numeric|exists:categories,id', //exists istenilen sartlar saglanirsa ilgili kaydı liseler.
+          'location'=>'nullable',
           'date'=> 'required|date',
-          'location'=>'nullable', //exists istenilen sartlar saglanirsa ilgili kaydı listeler.
-        //  'category_id'=>'required|numeric|exists:categories,id',
-
       ]);
 
         $expenditure = new Expenditure();
         $expenditure->total = $request->total;
-        $expenditure->date = $request->date;
+        $expenditure->category_id = $request->category_id;
         $expenditure->location = $request->location;
-      //  $expenditure->category_id = $request->category_id;
-
+        $expenditure->date = $request->date;
 
         $expenditure->save();
 
 
         //return redirect('welcome');
-        return "basarılı";
+        return redirect('home');
       }
 
     /**
