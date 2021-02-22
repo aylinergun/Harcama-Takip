@@ -13,12 +13,22 @@ class HomeController extends Controller
     //   $this->middleware('auth');
   //}
 
-     public function index()
+     public function addExpenditures()
      {
-          $categories=Category::all();
-          $expenditures=Expenditure::with('Category');
+       $categories=Category::all();
+       $expenditures=Expenditure::with('Category');
 
-          return view('create')->with(compact('categories', 'expenditures'));
+       return view('create')->with(compact('categories', 'expenditures'));
+    }
+
+    public function listExpenditures()
+    {
+       $categories=Category::all();
+       $expenditures=Expenditure::all();
+
+       return view('home')->with(compact('categories','expenditures'));
+    }
+
   }
-}
+
 ?>
