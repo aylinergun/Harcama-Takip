@@ -16,11 +16,10 @@ use Controllers\ExpenditureController;
 |
 */
 
-Route::get('/','App\Http\Controllers\HomeController@index');
+Route::get('/','App\Http\Controllers\HomeController@addExpenditures');
 
+Route::get('/list','App\Http\Controllers\HomeController@listExpenditures')->name('show');
 
 Auth::routes();
-
-Route::get('/liste','App\Http\Controllers\ExpenditureController@create');
 
 Route::resource('expenditures','App\Http\Controllers\ExpenditureController');

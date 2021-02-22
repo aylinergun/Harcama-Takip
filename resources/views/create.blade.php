@@ -10,24 +10,24 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-  <div style="background-color:lightblue">
-         @foreach ($errors->all() as $error)
-           <li>{{$error}}</li>
-         @endforeach
+    <div style="background-color:lightblue">
+           @foreach ($errors->all() as $error)
+             <li>{{$error}}</li>
+           @endforeach
+       </div>
+       <div align="right">
+      <strong><a href={{route('show')}}>Geri Dön</a></strong>
      </div>
-
-  <form method="post" action="{{url('/expenditures')}}" enctype="multipart/form-data">
-
-    {{csrf_field()}}
-
-    <div class="container">
-      <h3>Harcama Bilgileri</h3>
-    </hr>
-    <br>
-    <div class="form-group">
-      <label for="total">Toplam Tutar:</label>
-      <input type="text" name="total" id="total" class="form-group" required>
-    </div>
+     <form method="post" action="{{url('/expenditures')}}" enctype="multipart/form-data">
+        {{csrf_field()}}
+      <div class="container">
+        <h3>Harcama Bilgileri</h3>
+      </hr>
+      <br>
+      <div class="form-group">
+        <label for="total">Toplam Tutar:</label>
+        <input type="text" name="total" id="total" class="form-group" required>
+      </div>
     <div class="form-group">
       <label for="location">Harcama Yeri:</label>
       <input type="text" name="location" id="location" class="form-group">
