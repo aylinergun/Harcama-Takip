@@ -16,7 +16,7 @@ use Controllers\ExpenditureController;
 |
 */
 
-Route::get('/','App\Http\Controllers\HomeController@addExpenditures');
+Route::get('/','App\Http\Controllers\HomeController@addExpenditures')->name('add');
 
 Route::get('/list','App\Http\Controllers\HomeController@listExpenditures')->name('show');
 
