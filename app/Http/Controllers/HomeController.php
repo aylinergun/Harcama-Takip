@@ -32,9 +32,11 @@ class HomeController extends Controller
                             ->first();
              //Expenditure::select(\DB::raw('MONTH(date) AS month'))
 
-              $lastExpenditure=Expenditure::with('Category')
-                             ->orderBy('date','DESC')
-                             ->first();
+              $lastExpenditure=Expenditure::orderBy('date','DESC')
+                            ->first();
+              //Expenditure::with('Category')
+
+
 
               return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure'));
 
