@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Category;
 use App\Models\Expenditure;
+use Carbon\Carbon;
 
 class HomeController extends Controller
       {
@@ -18,24 +19,24 @@ class HomeController extends Controller
          public function index()
       {
             $categories=Category::all();
-            $expenditures=Expenditure::with('Category');
+            $expenditures=Expenditure::with('Category')
+                        ->orderBy('date');
 
-            $maxExpenditure=DB::table('expenditures')
-                            ->orderBy('total','desc')
+
+
+
+            $maxExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'))
+                            ->orderBy('total','DESC')
                             ->first();
 
-                    //  return "En çok harcama " .$maxExpenditure->total ;
-                      //return view('create')->with(compact('categories','maxExpenditure'));
+             $minExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'))                  
+                            ->orderBy('total','ASC')
+                            ->first();
+             //Expenditure::select(\DB::raw('MONTH(date) AS month'))
 
-             $minExpenditure=DB::table('expenditures')
-                              ->orderBy('total','asc')
-                              ->first();
-
-                      //return "En az harcama " .$minExpenditure->total;
-              //kategoriyle
               $lastExpenditure=Expenditure::with('category')
-                              ->orderBy('date','desc')
-                              ->first();
+                             ->orderBy('date','DESC')
+                             ->first();
 
               return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure'));
 

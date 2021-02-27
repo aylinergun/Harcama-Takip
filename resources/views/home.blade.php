@@ -62,7 +62,7 @@
   </div>
 <br><br>
 
-  <!--en cok harcama yapilan ay-->
+  <!--en cok harcama yapilan -->
 
     <div class="container">
       <div class="row" >
@@ -72,7 +72,7 @@
               <div align="center">
                 <tr>
                  <td>AY: </td>
-                 <td align="center">{{$maxExpenditure->date}}</td>
+                 <td align="center">{{$maxExpenditure->month}}</td>
                 <br>
                 <td>TUTAR: </td>
                 <td align="center">{{$maxExpenditure->total}}</td>
@@ -92,7 +92,7 @@
           <div align="center">
             <tr>
              <td>AY: </td>
-             <td align="center">{{$minExpenditure->date}}</td>
+             <td align="center">{{$minExpenditure->month}}</td>
             <br>
             <td>TUTAR: </td>
             <td align="center">{{$minExpenditure->total}}</td>
