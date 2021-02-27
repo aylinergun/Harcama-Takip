@@ -70,6 +70,7 @@
           <div class="panel panel-default">
             <div class="panel-body" align="center"><strong>En çok harcama yapılan ay</strong></div>
               <div align="center">
+                <br>
                 <tr>
                  <td>AY: </td>
                  <td align="center">{{$maxExpenditure->month}}</td>
@@ -77,8 +78,6 @@
                 <td>TUTAR: </td>
                 <td align="center">{{$maxExpenditure->total}}</td>
                 <br>
-                <td>YER: </td>
-                <td align="center">{{$maxExpenditure->location}}</td>
                 </tr>
               </div>
             </div>
@@ -90,6 +89,7 @@
       <div class="panel panel-default">
         <div class="panel-body" align="center"><strong>En az harcama yapılan ay</strong></div>
           <div align="center">
+            <br>
             <tr>
              <td>AY: </td>
              <td align="center">{{$minExpenditure->month}}</td>
@@ -97,8 +97,6 @@
             <td>TUTAR: </td>
             <td align="center">{{$minExpenditure->total}}</td>
             <br>
-            <td>YER: </td>
-            <td align="center">{{$minExpenditure->location}}</td>
             </tr>
           </div>
         </div>
@@ -110,6 +108,7 @@
       <div class="panel panel-default">
         <div class="panel-body" align="center"><strong>Son harcamanın detayları</strong></div>
           <div align="center">
+            <br>
             <tr>
               <td>AY: </td>
               <td align="center">{{$lastExpenditure->date}}</td>

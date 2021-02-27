@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Category;
 use App\Models\Expenditure;
-use Carbon\Carbon;
 
 class HomeController extends Controller
       {
@@ -22,19 +21,18 @@ class HomeController extends Controller
             $expenditures=Expenditure::with('Category')
                         ->orderBy('date');
 
-
-
-
-            $maxExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'))
+            $maxExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
+                            ->groupBy('month')
                             ->orderBy('total','DESC')
                             ->first();
 
-             $minExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'))                  
+             $minExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
+                            ->groupBy('month')
                             ->orderBy('total','ASC')
                             ->first();
              //Expenditure::select(\DB::raw('MONTH(date) AS month'))
 
-              $lastExpenditure=Expenditure::with('category')
+              $lastExpenditure=Expenditure::with('Category')
                              ->orderBy('date','DESC')
                              ->first();
 
