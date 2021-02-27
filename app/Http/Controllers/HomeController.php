@@ -22,17 +22,17 @@ class HomeController extends Controller
                         ->orderBy('date');
 
             $maxExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
-                            ->groupBy('month')
+                            ->groupBy('month','total')
                             ->orderBy('total','DESC')
                             ->first();
 
-             $minExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
-                            ->groupBy('month')
+           $minExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
+                            ->groupBy('month','total')
                             ->orderBy('total','ASC')
                             ->first();
              //Expenditure::select(\DB::raw('MONTH(date) AS month'))
 
-              $lastExpenditure=Expenditure::orderBy('date','DESC')
+          $lastExpenditure=Expenditure::orderBy('date','DESC')
                             ->first();
               //Expenditure::with('Category')
 
