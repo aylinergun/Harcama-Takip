@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Controllers\HomeController;
+use Controllers\ExpenditureController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','App\Http\Controllers\HomeController@addExpenditures')->name('add');
+
+Route::get('/list','App\Http\Controllers\HomeController@listExpenditures')->name('show');
+
+Auth::routes();
+
+Route::resource('expenditures','App\Http\Controllers\ExpenditureController');
