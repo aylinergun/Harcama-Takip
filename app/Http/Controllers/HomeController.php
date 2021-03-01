@@ -26,19 +26,24 @@ class HomeController extends Controller
                             ->orderBy('total','DESC')
                             ->first();
 
-           $minExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
+            $minExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
                             ->groupBy('month','total')
                             ->orderBy('total','ASC')
                             ->first();
              //Expenditure::select(\DB::raw('MONTH(date) AS month'))
 
-          $lastExpenditure=Expenditure::orderBy('date','DESC')
+            $lastExpenditure=Expenditure::orderBy('date','DESC')
                             ->first();
-              //Expenditure::with('Category')
 
 
+//yillik toplam harcama
+            $annualExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('SUM(total) total'))
+                              //DB::table('expenditures')
+                              ->groupBy('year')
+                              ->get();
 
-              return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure'));
+
+           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures'));
 
 
 
