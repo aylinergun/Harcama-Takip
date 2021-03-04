@@ -13,16 +13,17 @@
       background-color:#D7DBDD;
       color:#3A3845;
     }
-
-    .row {
-      background-color:#F7ECE5;
-      font-family:fantasy;
-      height: 150px ;
-      width: 400px;
-      margin: 10px;
-      float: left;
-
+    .container{
+      background-color:#F0F2F2;
+      font-style:normal;
+      color: #300B20;
     }
+    .row{
+      padding: 10px;
+      margin: 10px;
+      width: auto;
+    }
+
 </style>
 </head>
 <body>
@@ -40,11 +41,11 @@
       <br>
       <div class="form-group">
         <label for="total">Toplam Tutar:</label>
-        <input type="text" name="total" id="total" class="form-group" required>
+        <input type="text" name="total" id="total" class="form-group" value="{{old('total')}}" required>
       </div>
     <div class="form-group">
       <label for="location">Harcama Yeri:</label>
-      <input type="text" name="location" id="location" class="form-group">
+      <input type="text" name="location" id="location" class="form-group" value="{{old('location')}}">
     </div>
     <label >Kategori :</label>
     <select name="category_id">
@@ -56,7 +57,7 @@
     <div>
       <br>
       <label for="date">Harcama Tarihi:</label>
-      <input type="date" name="date" id="date" class="form-group" required>
+      <input type="date" name="date" id="date" class="form-group" value="{{old('date')}}" required>
     </div>
     <button type="submit" class="btn btn-primary btn-success">Gönder</button>
   </div>
@@ -102,7 +103,7 @@
         </div>
       </div>
     </div>
-
+<!--son harcama-->
   <div class="row">
     <div class="col-md-12 col-md-offset-0">
       <div class="panel panel-default">
@@ -126,7 +127,29 @@
         </div>
       </div>
     </div>
-
   </div>
+    <!--yillik harcama-->
+
+  <div class="panel panel-default">
+    <div class="container">
+      <div class="panel-body" align="center"><strong>YILLIK HARCAMALAR</strong></div>
+         <div align="center">
+            <div class="row align-items-center">
+                @foreach ($annualExpenditures as $annualExpenditure)
+                  <div class="col"><strong>
+                  Yıl:
+                {{$annualExpenditure->year}}
+                  <br>
+                  Yıllık Toplam Harcama
+                  <br>
+                {{$annualExpenditure->total}}
+            </strong></div>
+            @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 </body>
 </html>
