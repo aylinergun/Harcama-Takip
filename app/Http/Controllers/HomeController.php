@@ -42,7 +42,7 @@ class HomeController extends Controller
                               ->groupBy('year')
                               ->get();
 
-            $monthlyExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total) total'))
+            $monthlyExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total) total'),\DB::raw('COUNT(*) as number_of_expenditures'))
                               ->groupBy('year','month')
                               ->get();
 

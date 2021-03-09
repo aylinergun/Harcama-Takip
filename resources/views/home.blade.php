@@ -25,10 +25,9 @@
     }
     .col-sm{
       width: 500px;
-      height: 700px;
+      height:500px;
       text-align: center;
-
-    }
+     }
 
 </style>
 </head>
@@ -160,8 +159,11 @@
                     <td> Ay:</td>
                     <td>{{$monthlyExpenditure->month}}</td>
                        <br>
-                    <td>O Ay Yapılan Toplam Harcama:</td>
+                    <td>Yapılan Harcama:</td>
                     <td>{{$monthlyExpenditure->total}}</td>
+                       <br>
+                    <td>Harcama Sayısı:</td>
+                    <td>{{$monthlyExpenditure->number_of_expenditures}}</td>
                   </tr>
                     </div>
                   @endif
