@@ -23,6 +23,12 @@
       margin: 10px;
       width: auto;
     }
+    .col-sm{
+      width: 500px;
+      height: 700px;
+      text-align: center;
+
+    }
 
 </style>
 </head>
@@ -133,23 +139,38 @@
   <div class="panel panel-default">
     <div class="container">
       <div class="panel-body" align="center"><strong>YILLIK HARCAMALAR</strong></div>
-         <div align="center">
-            <div class="row align-items-center">
-                @foreach ($annualExpenditures as $annualExpenditure)
-                  <div class="col"><strong>
-                  Yıl:
-                {{$annualExpenditure->year}}
-                  <br>
-                  Yıllık Toplam Harcama
-                  <br>
-                {{$annualExpenditure->total}}
-            </strong></div>
-            @endforeach
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
+        <div align="center">
+          <div class="row align-items-center">
+            @foreach ($annualExpenditures as $annualExpenditure)
+              <div class="col-sm">
+              <strong>
+                <tr>
+                  <td>  Yıl: </td>
+                  <td>{{$annualExpenditure->year}}</td>
+                      <br>
+                  <td>Yıllık Toplam Harcama</td>
+                       <br>
+                  <td>{{$annualExpenditure->total}}</td>
+                </tr>
+              </strong>
+                @foreach ($monthlyExpenditures as $monthlyExpenditure)
+                  @if ($annualExpenditure->year==$monthlyExpenditure->year)
+                    <div class="row align-items-center">
+                  <tr>
+                    <td> Ay:</td>
+                    <td>{{$monthlyExpenditure->month}}</td>
+                       <br>
+                    <td>O Ay Yapılan Toplam Harcama:</td>
+                    <td>{{$monthlyExpenditure->total}}</td>
+                  </tr>
+                    </div>
+                  @endif
+                @endforeach
+              </div>
+           @endforeach
+         </div>
+       </div>
+     </div>
+ </div>
 </body>
 </html>
