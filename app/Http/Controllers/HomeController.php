@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 use App\Models\Category;
 use App\Models\Expenditure;
@@ -21,18 +21,18 @@ class HomeController extends Controller
             $expenditures=Expenditure::with('Category')
                         ->orderBy('date');
 
-            $maxExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
+            $maxExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total)  total'))
                             ->groupBy('month','total')
                             ->orderBy('total','DESC')
                             ->first();
 
-            $minExpenditure=Expenditure::select(DB::raw('MONTHNAME(date) month'),DB::raw('SUM(total)  total'))
+            $minExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total)  total'))
                             ->groupBy('month','total')
                             ->orderBy('total','ASC')
                             ->first();
              //Expenditure::select(\DB::raw('MONTH(date) AS month'))
 
-            $lastExpenditure=Expenditure::orderBy('date','DESC')
+            $lastExpenditure=Expenditure::orderBy('created_at','DESC')
                             ->first();
 
 
@@ -42,8 +42,12 @@ class HomeController extends Controller
                               ->groupBy('year')
                               ->get();
 
+            $monthlyExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total) total'))
+                              ->groupBy('year','month')
+                              ->get();
 
-           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures'));
+
+           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures'));
 
 
 
