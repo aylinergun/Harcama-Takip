@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+
 <style>
     body {
       background-color:#D7DBDD;
@@ -27,6 +28,15 @@
       width: 500px;
       height:500px;
       text-align: center;
+     }
+
+     .col-sm2{
+       width: 200px;
+       height:200px;
+       text-align: center;
+       padding: 40px;
+       margin:30px;
+
      }
 
 </style>
@@ -174,5 +184,37 @@
        </div>
      </div>
  </div>
+ <!--harcama tekrarlari-->
+ <div class="panel panel-default">
+   <div class="container">
+     <div class="panel-body" align="center"><strong>HARCAMA YERLERİ</strong></div>
+       <div align="center">
+         <div class="row align-items-center">
+            @foreach ($annualExpenditures as $annualExpenditure)
+             <div class="col-sm2">
+                 <strong>
+                   <tr>
+                     <td>{{$annualExpenditure->year}}</td>
+                        <br>
+                    </tr>
+                  </strong>
+                  @foreach ($expenditureLocations as $expenditureLocation)
+                    @if($annualExpenditure->year==$expenditureLocation->year)
+                      <div class="row align-items-center">
+                        <tr>
+                          <td>{{$expenditureLocation->location}} - </td>
+                          <td>{{$expenditureLocation->number_of_expenditures}}</td>
+                      </tr>
+                    </div>
+                    @endif
+                    @endforeach
+                  </div>
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 </body>
 </html>

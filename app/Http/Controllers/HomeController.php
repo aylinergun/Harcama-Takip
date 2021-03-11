@@ -17,6 +17,8 @@ class HomeController extends Controller
 
          public function index()
       {
+
+
             $categories=Category::all();
             $expenditures=Expenditure::with('Category')
                         ->orderBy('date');
@@ -30,28 +32,29 @@ class HomeController extends Controller
                             ->groupBy('month','total')
                             ->orderBy('total','ASC')
                             ->first();
-             //Expenditure::select(\DB::raw('MONTH(date) AS month'))
+
 
             $lastExpenditure=Expenditure::orderBy('created_at','DESC')
                             ->first();
 
 
-//yillik toplam harcama
             $annualExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('SUM(total) total'))
-                              //DB::table('expenditures')
-                              ->groupBy('year')
-                              ->get();
+                            ->groupBy('year')
+                            ->get();
 
             $monthlyExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total) total'),\DB::raw('COUNT(*) as number_of_expenditures'))
-                              ->groupBy('year','month')
-                              ->get();
+                            ->groupBy('year','month')
+                            ->get();
+
+            $expenditureLocations=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('COUNT(*) as number_of_expenditures'),\DB::raw('location'))
+                            ->groupBy('year','location')
+                            ->get();
 
 
-           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures'));
 
 
+           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures','expenditureLocations'));
 
       }
-    }
 
-?>
+    }
