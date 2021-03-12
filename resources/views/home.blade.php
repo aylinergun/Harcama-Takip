@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -25,16 +25,16 @@
       width: auto;
     }
     .col-sm{
-      width: 500px;
+      width:500px;
       height:500px;
       text-align: center;
      }
 
      .col-sm2{
-       width: 200px;
-       height:200px;
-       text-align: center;
-       padding: 40px;
+       width:200px;
+       height:300px;
+       text-align:center;
+       padding: 20px;
        margin:30px;
 
      }
@@ -89,7 +89,7 @@
                 <br>
                 <tr>
                  <td>AY: </td>
-                 <td align="center">{{$maxExpenditure->month}}</td>
+                 <td align="center">{{Carbon\Carbon::createFromFormat('m',$maxExpenditure->month)->formatLocalized('%B')}}</td>
                 <br>
                 <td>TUTAR: </td>
                 <td align="center">{{$maxExpenditure->total}}</td>
@@ -108,7 +108,7 @@
             <br>
             <tr>
              <td>AY: </td>
-             <td align="center">{{$minExpenditure->month}}</td>
+             <td align="center">{{Carbon\Carbon::createFromFormat('m',$minExpenditure->month)->formatLocalized('%B')}}</td>
             <br>
             <td>TUTAR: </td>
             <td align="center">{{$minExpenditure->total}}</td>
@@ -167,7 +167,7 @@
                     <div class="row align-items-center">
                   <tr>
                     <td> Ay:</td>
-                    <td>{{$monthlyExpenditure->month}}</td>
+                    <td>{{Carbon\Carbon::createFromFormat('M',$monthlyExpenditure->month,'UTC')->formatLocalized('%B')}}</td>
                        <br>
                     <td>Yapılan Harcama:</td>
                     <td>{{$monthlyExpenditure->total}}</td>
