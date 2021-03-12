@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Expenditure;
 
+use Carbon\Carbon;
+
 class HomeController extends Controller
       {
+
          public function __construct()
          {
            $this->middleware('auth');
@@ -18,17 +21,17 @@ class HomeController extends Controller
          public function index()
       {
 
-
             $categories=Category::all();
+            
             $expenditures=Expenditure::with('Category')
                         ->orderBy('date');
 
-            $maxExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total)  total'))
+            $maxExpenditure=Expenditure::select(\DB::raw('MONTH(date) month'),\DB::raw('SUM(total)  total'))
                             ->groupBy('month','total')
                             ->orderBy('total','DESC')
                             ->first();
 
-            $minExpenditure=Expenditure::select(\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total)  total'))
+            $minExpenditure=Expenditure::select(\DB::raw('MONTH(date) month'),\DB::raw('SUM(total)  total'))
                             ->groupBy('month','total')
                             ->orderBy('total','ASC')
                             ->first();
