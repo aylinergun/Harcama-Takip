@@ -22,7 +22,7 @@ class HomeController extends Controller
       {
 
             $categories=Category::all();
-            
+
             $expenditures=Expenditure::with('Category')
                         ->orderBy('date');
 
@@ -53,10 +53,13 @@ class HomeController extends Controller
                             ->groupBy('year','location')
                             ->get();
 
+            $actualExpenditures=Expenditure::whereMonth('date', Carbon::now()->month)
+                            ->whereYear('date', Carbon::now()->year)
+                            ->get();
 
 
 
-           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures','expenditureLocations'));
+           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures','expenditureLocations','actualExpenditures'));
 
       }
 

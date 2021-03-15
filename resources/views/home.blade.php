@@ -214,7 +214,36 @@
         </div>
       </div>
     </div>
-
+<!--bu ay yapilan harcamalar-->
+<div class="panel panel-default">
+  <div class="container">
+    <div class="panel-body" align="center"><strong>BU AY YAPILAN HARCAMALAR</strong></div>
+      <div align="center">
+            <div class="row">
+              <table width=100% align="center">
+                    <tr>
+                        <td align="center"><strong>TUTAR</strong></td>
+                        <br>
+                        <td align="center"><strong>YER</strong></td>
+                        <br>
+                        <td align="center"><strong>KATEGORİ</strong></td>
+                        <br>
+                        <td align="center"><strong>TARİH</strong></td>
+                    </tr>
+                @foreach ($actualExpenditures as $actualExpenditure)
+                  <tr>
+                    <td align="center">{{$actualExpenditure->total}}</td>
+                    <td align="center">{{$actualExpenditure->location}}</td>
+                    <td align="center">{{$actualExpenditure->category->category_name}}</td>
+                    <td align="center">{{$actualExpenditure->date}}</td>
+                  </tr>
+                @endforeach
+              </table>
+            </div>
+         </div>
+       </div>
+     </div>
+   </div>
 
 </body>
 </html>
