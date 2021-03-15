@@ -244,6 +244,33 @@
        </div>
      </div>
    </div>
+  <!--kategoriye gore harcama yeri-->
+  <div class="panel panel-default">
+    <div class="container">
+      <div class="panel-body" align="center"><strong>Kategoriye Göre Harcama Yeri</strong></div>
+        <div align="center">
+          <div class="row ">
+            <table width=100% align="center">
+              <tr>
+                @foreach ($categories as $category)
+                    <div class="col">
+                      <strong>{{$category->category_name}}</strong>
+                        @foreach ($categoryExpenditures as $categoryExpenditure)
+                          @if($categoryExpenditure->category_id==$category->id)
+                            <br>
+
+                            {{$categoryExpenditure->location}}
+
+                          @endif
+                        @endforeach
+                      </div>
+                  @endforeach
+                </tr>
+              </table>
+            </div>
+          </div>
+       </div>
+     </div>
 
 </body>
 </html>

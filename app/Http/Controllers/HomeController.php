@@ -57,9 +57,13 @@ class HomeController extends Controller
                             ->whereYear('date', Carbon::now()->year)
                             ->get();
 
+            $categoryExpenditures=Expenditure::select(\DB::raw('location'),\DB::raw('category_id'))
+                            ->groupBy('category_id','location')
+                            ->get();
 
 
-           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures','expenditureLocations','actualExpenditures'));
+
+           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures','expenditureLocations','actualExpenditures','categoryExpenditures'));
 
       }
 
