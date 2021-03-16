@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Category;
 use App\Models\Expenditure;
@@ -61,9 +61,10 @@ class HomeController extends Controller
                             ->groupBy('category_id','location')
                             ->get();
 
+            $allExpenditures=Expenditure::paginate(5);
 
 
-           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures','expenditureLocations','actualExpenditures','categoryExpenditures'));
+           return view('home')->with(compact('categories','expenditures','maxExpenditure','minExpenditure','lastExpenditure','annualExpenditures','monthlyExpenditures','expenditureLocations','actualExpenditures','categoryExpenditures','allExpenditures'));
 
       }
 

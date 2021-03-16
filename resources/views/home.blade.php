@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
 
 <style>
     body {
@@ -28,6 +28,7 @@
       width:500px;
       height:500px;
       text-align: center;
+      margin: 20px;
      }
 
      .col-sm2{
@@ -99,6 +100,7 @@
             </div>
           </div>
         </div>
+  <br>
 <!-- en az harcama -->
   <div class="row" >
     <div class="col-md-12 col-md-offset-0">
@@ -118,6 +120,7 @@
         </div>
       </div>
     </div>
+  <br>
 <!--son harcama-->
   <div class="row">
     <div class="col-md-12 col-md-offset-0">
@@ -143,8 +146,8 @@
       </div>
     </div>
   </div>
+<br>
     <!--yillik harcama-->
-
   <div class="panel panel-default">
     <div class="container">
       <div class="panel-body" align="center"><strong>YILLIK HARCAMALAR</strong></div>
@@ -183,7 +186,8 @@
          </div>
        </div>
      </div>
- </div>
+  </div>
+<br>
  <!--harcama tekrarlari-->
  <div class="panel panel-default">
    <div class="container">
@@ -214,6 +218,7 @@
         </div>
       </div>
     </div>
+  <br>
 <!--bu ay yapilan harcamalar-->
 <div class="panel panel-default">
   <div class="container">
@@ -244,6 +249,7 @@
        </div>
      </div>
    </div>
+ <br>
   <!--kategoriye gore harcama yeri-->
   <div class="panel panel-default">
     <div class="container">
@@ -271,6 +277,34 @@
           </div>
        </div>
      </div>
-
+  <br>
+  <!--butun harcamalar-paginate-->
+  <div class="panel panel-default">
+    <div class="container">
+      <div class="panel-body" align="center"><strong>Harcamalar</strong></div>
+        <div align="center">
+          <div class="col-sm">
+            <table width=100% align="center">
+              <br>
+              <tr height=50>
+                <td align="center"><strong>Tutar</strong></strong></strong></strong></td>
+                <td align="center"><strong>Yer</strong></strong></strong></td>
+                <td align="center"><strong>Kategori</strong></strong></td>
+                <td align="center"><strong>Tarih</strong></td>
+              </tr>
+              @foreach ($allExpenditures as $allExpenditure)
+                <tr>
+                  <td align="center">{{$allExpenditure->total}}</td>
+                  <td align="center">{{$allExpenditure->location}}</td>
+                  <td align="center">{{$allExpenditure->category->category_name}}</td>
+                  <td align="center">{{$allExpenditure->date}}</td>
+                </tr>
+              @endforeach
+              </table>
+              {{ $allExpenditures->links()}}
+            </div>
+          </div>
+       </div>
+     </div>
 </body>
 </html>
