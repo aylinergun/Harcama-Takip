@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Controllers\HomeController;
 use Controllers\ExpenditureController;
 
+use App\Models\Expenditure;
 
+use App\Http\Resources\Expenditure as ExpenditureCollection;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +18,11 @@ use Controllers\ExpenditureController;
 |
 */
 
-Route::get('/','App\Http\Controllers\HomeController@addExpenditures')->name('add');
+Route::get('/','App\Http\Controllers\HomeController@index')->name('add');
 
-Route::get('/list','App\Http\Controllers\HomeController@listExpenditures')->name('show');
+Route::get('/store',function(){
+  return ExpenditureCollection::collection(Expenditure::all());
+});
 
 Auth::routes();
 
