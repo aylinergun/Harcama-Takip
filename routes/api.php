@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Expenditure;
 
+use App\Http\Resources\Expenditure as ExpenditureCollection;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/store',function(){
+  return ExpenditureCollection::collection(Expenditure::all());
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
