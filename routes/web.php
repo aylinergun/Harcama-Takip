@@ -3,10 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Controllers\HomeController;
 use Controllers\ExpenditureController;
-
-use App\Models\Expenditure;
-
-use App\Http\Resources\Expenditure as ExpenditureCollection;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,11 +15,9 @@ use App\Http\Resources\Expenditure as ExpenditureCollection;
 */
 
 Route::get('/','App\Http\Controllers\HomeController@index')->name('add');
-
-Route::get('/store',function(){
-  return ExpenditureCollection::collection(Expenditure::all());
-});
-
 Auth::routes();
-
 Route::resource('expenditures','App\Http\Controllers\ExpenditureController');
+
+Route::prefix('api')->group(function() {
+    Route::resource('expenditures', 'App\Http\Controllers\Api\V1\ExpenditureController');
+});

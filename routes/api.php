@@ -18,21 +18,19 @@ use App\Http\Resources\ExpenditureResource as ExpenditureCollection;
 |
 */
 
-Route::get('expendituresPage','App\Http\Controllers\Api\V1\ExpenditureController@expendituresPage');
-Route::get('maxExpenditure','App\Http\Controllers\Api\V1\ExpenditureController@maxExpenditure');
-Route::get('minExpenditure','App\Http\Controllers\Api\V1\ExpenditureController@minExpenditure');
-Route::get('lastExpenditure','App\Http\Controllers\Api\V1\ExpenditureController@lastExpenditure');
-Route::get('annualExpenditures','App\Http\Controllers\Api\V1\ExpenditureController@annualExpenditures');
-Route::get('monthlyExpenditures','App\Http\Controllers\Api\V1\ExpenditureController@monthlyExpenditures');
-Route::get('expenditureLocations','App\Http\Controllers\Api\V1\ExpenditureController@expenditureLocations');
-Route::get('actualExpenditures','App\Http\Controllers\Api\V1\ExpenditureController@actualExpenditures');
-Route::get('categoryExpenditures','App\Http\Controllers\Api\V1\ExpenditureController@categoryExpenditures');
-Route::get('allExpenditures','App\Http\Controllers\Api\V1\ExpenditureController@allExpenditures');
+Route::group(['prefix'=>'/v1'],function(){
 
+Route::get('main-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@mainExpenditure');
+Route::get('max-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@maxExpenditure');
+Route::get('min-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@minExpenditure');
+Route::get('last-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@lastExpenditure');
+Route::get('annual-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@annualExpenditures');
+Route::get('monthly-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@monthlyExpenditures');
+Route::get('expenditure-locations','App\Http\Controllers\Api\V1\ExpenditureController@expenditureLocations');
+Route::get('actual-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@actualExpenditures');
+Route::get('category-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@categoryExpenditures');
+Route::get('all-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@allExpenditures');
 
-
-Route::get('/store',function(){
-  return ExpenditureCollection::collection(Expenditure::all());
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
