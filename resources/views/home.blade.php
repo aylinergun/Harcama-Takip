@@ -1,48 +1,6 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Harcamalar</title>
+@extends('layouts.app')
+@section('content')
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
-
-<style>
-    body {
-      background-color:#D7DBDD;
-      color:#3A3845;
-    }
-    .container{
-      background-color:#F0F2F2;
-      font-style:normal;
-      color: #300B20;
-    }
-    .row{
-      padding: 10px;
-      margin: 10px;
-      width: auto;
-    }
-    .col-sm{
-      width:500px;
-      height:500px;
-      text-align: center;
-      margin: 20px;
-     }
-
-     .col-sm2{
-       width:200px;
-       height:300px;
-       text-align:center;
-       padding: 20px;
-       margin:30px;
-
-     }
-
-</style>
-</head>
-<body>
     <div style="background-color:lightblue">
            @foreach ($errors->all() as $error)
              <li>{{$error}}</li>
@@ -78,48 +36,16 @@
     <button type="submit" class="btn btn-primary btn-success">Gönder</button>
   </div>
 <br><br>
-
   <!--en cok harcama yapilan -->
 
     <div class="container">
       <div class="row" >
-        <div class="col-md-12 col-md-offset-0">
-          <div class="panel panel-default">
-            <div class="panel-body" align="center"><strong>En çok harcama yapılan ay</strong></div>
-              <div align="center">
-                <br>
-                <tr>
-                 <td>AY: </td>
-                 <td align="center">{{Carbon\Carbon::createFromFormat('m',$maxExpenditure->month)->formatLocalized('%B')}}</td>
-                <br>
-                <td>TUTAR: </td>
-                <td align="center">{{$maxExpenditure->total}}</td>
-                <br>
-                </tr>
-              </div>
-            </div>
-          </div>
-        </div>
-  <br>
+       <max-expenditure
+       ></max-expenditure>
+    <br>
 <!-- en az harcama -->
-  <div class="row" >
-    <div class="col-md-12 col-md-offset-0">
-      <div class="panel panel-default">
-        <div class="panel-body" align="center"><strong>En az harcama yapılan ay</strong></div>
-          <div align="center">
-            <br>
-            <tr>
-             <td>AY: </td>
-             <td align="center">{{Carbon\Carbon::createFromFormat('m',$minExpenditure->month)->formatLocalized('%B')}}</td>
-            <br>
-            <td>TUTAR: </td>
-            <td align="center">{{$minExpenditure->total}}</td>
-            <br>
-            </tr>
-          </div>
-        </div>
-      </div>
-    </div>
+    <min-expenditure
+    ></min-expenditure>
   <br>
 <!--son harcama-->
   <div class="row">
@@ -306,5 +232,4 @@
           </div>
        </div>
      </div>
-</body>
-</html>
+@endsection
