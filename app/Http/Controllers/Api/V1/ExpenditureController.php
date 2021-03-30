@@ -12,14 +12,14 @@ use Carbon\Carbon;
 
 class ExpenditureController extends Controller
 {
-      public function expendituresPage()
+      public function mainExpenditure()
       {
-           $expendituresPage=Expenditure::with('Category')
+           $mainExpenditure=Expenditure::with('Category')
                             ->orderBy('date','desc')
                             ->get();
 
            return response()->json([
-             'data'=>$expendituresPage,
+             'data'=>$mainExpenditure,
            ]);
       }
 
@@ -119,6 +119,28 @@ class ExpenditureController extends Controller
         Return response()->json([
           'data'=>$allExpenditures,
         ]);
+      }
+
+      public function createExpenditures(Request $request)
+      {
+          $this->validate($request, [
+             'total' => 'required|numeric',
+             'category_id' => 'required|numeric|exists:categories,id',
+             'location' => 'required',
+             'date' => 'required|date',
+       ]);
+
+           $expenditure = new Expenditure();
+           $expenditure->total = $request->total;
+           $expenditure->category_id = $request->category_id;
+           $expenditure->location = $request->location;
+           $expenditure->date = $request->date;
+
+           $expenditure->save();
+
+           Return response()->json([
+             'data'=>$expenditure,
+           ]);
       }
 
 }

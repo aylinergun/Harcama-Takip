@@ -30,6 +30,7 @@ Route::get('expenditure-locations','App\Http\Controllers\Api\V1\ExpenditureContr
 Route::get('actual-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@actualExpenditures');
 Route::get('category-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@categoryExpenditures');
 Route::get('all-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@allExpenditures');
+Route::post('create-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@createExpenditures');
 
 });
 
