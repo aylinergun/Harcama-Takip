@@ -27,6 +27,7 @@ Vue.component('expenditure-locations', require('./components/ExpenditureLocation
 Vue.component('actual-expenditures', require('./components/ActualExpendituresComponent.vue').default);
 Vue.component('category-expenditures', require('./components/CategoryExpendituresComponent.vue').default);
 Vue.component('all-expenditures', require('./components/AllExpendituresComponent.vue').default);
+Vue.component('create-expenditures', require('./components/CreateExpendituresComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
