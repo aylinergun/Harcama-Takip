@@ -2,31 +2,25 @@
   <div class="col-md-12 col-md-offset-0">
      <div class="panel panel-default">
        <div class="panel-body" align="center"><strong>HARCAMA YERLERİ</strong></div>
-          <div align="center">
-            <div class="row align-items-center">
-              <div v-for="annualExpenditures in annualExpenditureses">
-                <div class="col-sm2">
-                  <strong>
-                    <tr>
-                      <td>{{annualExpenditures.year}}</td>
-                    </tr>
+          <div class="container">
+            <div class="row">
+              <div v-for="year in years">
+                   <div class="col-sm-2"><strong>{{year.value}}</strong>
                   </strong>
-                  <div v-for="expenditureLocations in expenditureLocationses">
-                    <div v-if="annualExpenditures.year==expenditureLocations.year">
-                      <div class="row align-items-center">
-                        <tr>
-                          <td>{{expenditureLocations.location}} - </td>
-                          <td>{{expenditureLocations.number_of_expenditures}}</td>
-                        </tr>
-                      </div>
+                  <div v-for="expenditureLocations in expenditureLocations">
+
+                    <div v-if="expenditureLocations.year==year.value">
+
+                          {{expenditureLocations.location}} -
+                          {{expenditureLocations.number_of_expenditures}}
                     </div>
                   </div>
                 </div>
+                </div>
+              </div>
            </div>
          </div>
        </div>
-     </div>
-  </div>
 </template>
 
 <script>
@@ -34,11 +28,10 @@ import axios from 'axios'
 
     export default{
       mounted(){
-        this.loadLastExpenditureLocations();
+        this.loadExpenditureLocations();
       },
       props:[
         'years',
-        'annualExpenditureses'
       ],
       data(){
         return{
@@ -46,7 +39,7 @@ import axios from 'axios'
         }
       },
       methods:{
-        loadLastExpenditureLocations(){
+        loadExpenditureLocations(){
           axios.get('/api/v1/expenditure-locations')
             .then((response)=>{
               this.expenditureLocations=response.data.data;

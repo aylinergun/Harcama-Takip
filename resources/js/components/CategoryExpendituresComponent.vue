@@ -1,26 +1,23 @@
 <template>
-  <div class="container">
-    <div class="panel-body" align="center"><strong>Kategoriye Göre Harcama Yeri</strong></div>
-      <div align="center">
-        <div class="row ">
-          <table width=100% align="center">
-            <tr>
-              <div v-for="categories in category">
-                  <div class="col">
-                    <strong>{{category.category_name}}</strong>
-                      <div v-for="categoryExpenditures in categoryExpenditureses">
-                        <div v-if="categoryExpenditure.category_id==category.id">
-                          {{categoryExpenditure.location}}
-                        </div>
+<div class="col-md-10 col-md-offset-1" align="center">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <strong><p align="center">Kategoriye Göre Harcama Yeri</p></strong>
+          <div class="row " style="color: #4d4d4d;">
+            <div v-for="category in categories">
+              <div class="col-1 col-sm-3">
+                <strong>{{category.category_name}}</strong>
+                    <div v-for="categoryExpenditures in categoryExpenditures">
+                      <div v-if="categoryExpenditures.category_id == category.id">
+                        {{categoryExpenditures.location}}
                       </div>
-                    </div>
                 </div>
-              </tr>
-            </table>
+              </div>
+            </div>
           </div>
         </div>
      </div>
-
+ </div>
 </template>
 
 <script>
@@ -31,8 +28,7 @@ import axios from 'axios'
           this.loadCategoryExpenditures();
         },
         props:[
-          'categoryExpenditureses',
-          'category'
+          'categories',
         ],
         data(){
           return{
@@ -41,11 +37,14 @@ import axios from 'axios'
         },
         methods:{
           loadCategoryExpenditures(){
-            axios.get('api/v1/category-expenditures')
-              .then((response)=>{
-                this.categoryExpenditures=response.data.data;
-              })
-          }
-        },
+            axios.get('/api/v1/category-expenditures')
+            .then((response)=>{
+              this.categoryExpenditures=response.data.data;
+            })
+            .catch((error)=>{
+              console.log('Error:',error);
+            });
+          },
+        }
       }
 </script>

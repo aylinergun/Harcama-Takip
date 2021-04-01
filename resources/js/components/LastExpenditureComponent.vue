@@ -1,23 +1,19 @@
 <template>
-  <div class="col-md-12 col-md-offset-0">
+  <div class="col">
     <div class="panel panel-default">
       <div class="panel-body" align="center"><strong>Son harcamanın detayları</strong></div>
-        <div align="center">
-          <div class="if" v-if="lastExpenditure">
-            <tr>
-              <td>AY: </td>
-              <td align="center">{{lastExpenditure.date}}</td>
-              <td>TUTAR: </td>
-              <td align="center">{{lastExpenditure.total}}</td>
-              <td>KATEGORİ: </td>
-              <td align="center">{{lastExpenditure.category_name}}</td>
-              <td>YER: </td>
-              <td align="center">{{lastExpenditure.location}}</td>
-            </tr>
+          <div v-if="lastExpenditure">
+            <label>Tutar: </label>
+               {{lastExpenditure.total}}<br>
+             <label>Yer: </label>
+               {{lastExpenditure.location}}<br>
+             <label>Kategori: </label>
+               {{lastExpenditure.category.category_name}}<br>
+             <label>Tarih: </label>
+               {{lastExpenditure.date}}
           </div>
         </div>
       </div>
-    </div>
 </template>
 
 <script>
@@ -31,7 +27,7 @@ import axios from 'axios'
       ],
       data(){
         return{
-          lastExpenditure:null
+          lastExpenditure:null,
         }
       },
       methods:{
