@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Http\Resources\ExpenditureCollection;
+
 use Carbon\Carbon;
 
 class ExpenditureController extends Controller
@@ -49,7 +51,8 @@ class ExpenditureController extends Controller
 
       public function lastExpenditure()
       {
-          $lastExpenditure=Expenditure::orderBy('created_at','DESC')
+          $lastExpenditure=Expenditure::with('Category')
+                          ->orderBy('created_at','DESC')
                           ->first();
 
           Return response()->json([
@@ -59,8 +62,9 @@ class ExpenditureController extends Controller
 
       public function annualExpenditures()
       {
-          $annualExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('SUM(total) total'))
-                            ->groupBy('year')
+          $annualExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('MONTH(date) month'),\DB::raw('SUM(total) total'),\DB::raw('COUNT(*) as number_of_expenditures'))
+                            ->groupby('year', 'month')
+                            ->orderBy('year')
                             ->get();
 
           Return response()->json([
@@ -68,15 +72,15 @@ class ExpenditureController extends Controller
           ]);
       }
 
-      public function monthlyExpenditures()
+      public function totalExpenditureYearly()
       {
-          $monthlyExpenditures=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('MONTHNAME(date) month'),\DB::raw('SUM(total) total'),\DB::raw('COUNT(*) as number_of_expenditures'))
-                          ->groupBy('year','month')
+        $totalExpenditureYearly=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('SUM(total) as totalExpenditure'))
+                          ->groupBy('year')
+                          ->orderBy('year')
                           ->get();
-
-          Return response()->json([
-            'data'=>$monthlyExpenditures,
-          ]);
+        Return response()->json([
+          'data'=>$totalExpenditureYearly,
+        ]);
       }
 
       public function expenditureLocations()
@@ -92,8 +96,9 @@ class ExpenditureController extends Controller
 
       public function actualExpenditures()
       {
-          $actualExpenditures=Expenditure::whereMonth('date', Carbon::now()->month)
+          $actualExpenditures=Expenditure::with('Category')
                           ->whereYear('date', Carbon::now()->year)
+                          ->whereMonth('date', Carbon::now()->month)
                           ->get();
 
           Return response()->json([
@@ -114,7 +119,8 @@ class ExpenditureController extends Controller
 
       public function allExpenditures()
       {
-        $allExpenditures=Expenditure::paginate(5);
+        $allExpenditures=Expenditure::with('Category')
+                        ->paginate(5);
 
         Return response()->json([
           'data'=>$allExpenditures,
