@@ -50,7 +50,7 @@ import axios from 'axios'
     },
     methods:{
       addExpenditures(){
-        axios.post('/api/v1/create-expenditures',this.spaces)
+        axios.post('/api/v1/create-expenditure',this.spaces)
           .then((response)=>{
               this.spaces={};
         })

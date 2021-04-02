@@ -7,12 +7,12 @@
               <div v-for="year in years">
                    <div class="col-sm-2"><strong>{{year.value}}</strong>
                   </strong>
-                  <div v-for="expenditureLocations in expenditureLocations">
+                  <div v-for="expenditureLocationCount in expenditureLocationCount">
 
-                    <div v-if="expenditureLocations.year==year.value">
+                    <div v-if="expenditureLocationCount.year==year.value">
 
-                          {{expenditureLocations.location}} -
-                          {{expenditureLocations.number_of_expenditures}}
+                          {{expenditureLocationCount.location}} -
+                          {{expenditureLocationCount.number_of_expenditures}}
                     </div>
                   </div>
                 </div>
@@ -28,21 +28,21 @@ import axios from 'axios'
 
     export default{
       mounted(){
-        this.loadExpenditureLocations();
+        this.loadExpenditureLocationCount();
       },
       props:[
         'years',
       ],
       data(){
         return{
-          expenditureLocations:null
+          expenditureLocationCount:null
         }
       },
       methods:{
-        loadExpenditureLocations(){
-          axios.get('/api/v1/expenditure-locations')
+        loadExpenditureLocationCount(){
+          axios.get('/api/v1/expenditure-location-count')
             .then((response)=>{
-              this.expenditureLocations=response.data.data;
+              this.expenditureLocationCount=response.data.data;
             })
         }
       },
