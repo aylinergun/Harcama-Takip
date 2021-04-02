@@ -22,12 +22,11 @@ Vue.component('max-expenditure', require('./components/MaxExpenditureComponent.v
 Vue.component('min-expenditure', require('./components/MinExpenditureComponent.vue').default);
 Vue.component('last-expenditure', require('./components/LastExpenditureComponent.vue').default);
 Vue.component('annual-expenditures', require('./components/AnnualExpendituresComponent.vue').default);
-Vue.component('monthly-expenditures', require('./components/MonthlyExpendituresComponent.vue').default);
-Vue.component('expenditure-locations', require('./components/ExpenditureLocationsComponent.vue').default);
-Vue.component('actual-expenditures', require('./components/ActualExpendituresComponent.vue').default);
+Vue.component('expenditure-location-count', require('./components/ExpenditureLocationCountComponent.vue').default);
+Vue.component('current-month-expenditure', require('./components/CurrentMonthExpenditureComponent.vue').default);
 Vue.component('category-expenditures', require('./components/CategoryExpendituresComponent.vue').default);
 Vue.component('all-expenditures', require('./components/AllExpendituresComponent.vue').default);
-Vue.component('create-expenditures', require('./components/CreateExpendituresComponent.vue').default);
+Vue.component('create-expenditure', require('./components/CreateExpenditureComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

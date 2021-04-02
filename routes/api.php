@@ -25,12 +25,12 @@ Route::get('max-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@
 Route::get('min-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@minExpenditure');
 Route::get('last-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@lastExpenditure');
 Route::get('annual-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@annualExpenditures');
-Route::get('monthly-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@monthlyExpenditures');
-Route::get('expenditure-locations','App\Http\Controllers\Api\V1\ExpenditureController@expenditureLocations');
-Route::get('actual-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@actualExpenditures');
+Route::get('total-expenditure-yearly','App\Http\Controllers\Api\V1\ExpenditureController@totalExpenditureYearly');
+Route::get('expenditure-location-count','App\Http\Controllers\Api\V1\ExpenditureController@expenditureLocationCount');
+Route::get('current-month-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@currentMonthExpenditure');
 Route::get('category-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@categoryExpenditures');
 Route::get('all-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@allExpenditures');
-Route::post('create-expenditures','App\Http\Controllers\Api\V1\ExpenditureController@createExpenditures');
+Route::post('create-expenditure','App\Http\Controllers\Api\V1\ExpenditureController@createExpenditure');
 
 });
 
