@@ -49,11 +49,12 @@
        ></category-expenditures>
 
 </div>
+<div class="container">
     <all-expenditures
       :all-expenditures="{{$allExpenditures}}"
       :categories="{{$categories}}"
     ><all-expenditures>
-
+</div>
 
 
 @endsection
