@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" @updateComponent="update">
     <div class="row">
       <div class="col-md-12 col-md-offset-2">
         <div class="panel panel-default">
@@ -28,18 +28,20 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import {$eventBus} from '../app.js';
 
     export default{
       mounted(){
         this.loadCurrentMonthExpenditure();
       },
-      props:[
-      ],
       data(){
         return{
           currentMonthExpenditure:null,
         }
+      },
+      created(){
+        $eventBus.$on('updateComponent',this.update);
       },
       methods:{
         loadCurrentMonthExpenditure(){
@@ -51,6 +53,11 @@ import axios from 'axios'
               console.log('Error:',error);
             });
       },
-    }
+      update(){
+        setTimeout(()=>{
+          this.loadCurrentMonthExpenditure();
+        },2000);
+      },
+    },
   }
 </script>

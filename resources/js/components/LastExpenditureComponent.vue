@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div class="col" @updateComponent="update">
     <div class="panel panel-default">
       <div class="panel-body" align="center"><strong>Son harcamanın detayları</strong></div>
           <div v-if="lastExpenditure">
@@ -17,18 +17,20 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import {$eventBus} from '../app.js';
 
     export default{
       mounted(){
         this.loadLastExpenditure();
       },
-      props:[
-      ],
       data(){
         return{
           lastExpenditure:null,
         }
+      },
+      created(){
+        $eventBus.$on('updateComponent',this.update);
       },
       methods:{
         loadLastExpenditure(){
@@ -40,6 +42,11 @@ import axios from 'axios'
               console.log('Error:',error);
             });
       },
-    }
+      update(){
+        setTimeout(()=>{
+          this.loadLastExpenditure();
+        },2000);
+      },
+    },
   }
 </script>
