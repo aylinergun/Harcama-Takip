@@ -26,12 +26,16 @@ Vue.component('expenditure-location-count', require('./components/ExpenditureLoc
 Vue.component('current-month-expenditure', require('./components/CurrentMonthExpenditureComponent.vue').default);
 Vue.component('category-expenditures', require('./components/CategoryExpendituresComponent.vue').default);
 Vue.component('all-expenditures', require('./components/AllExpendituresComponent.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('create-expenditure', require('./components/CreateExpenditureComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+//eventBus tanimi yapilmasi gerekiyor
+import Vue from 'vue'
+export const $eventBus=new Vue();
 
 const app = new Vue({
     el: '#app',

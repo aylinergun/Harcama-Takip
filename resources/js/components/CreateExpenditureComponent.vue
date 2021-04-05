@@ -24,17 +24,17 @@
         <label for="date">Harcama Tarihi:</label>
         <input type="date" name="date" v-model="spaces.date" class="form-group" required></input>
       </div>
-      <button type="submit" class="btn btn-primary btn-success">Gönder</button>
+      <button type="submit" class="btn btn-primary btn-success" @click="updateComponent()">Gönder</button>
     </div>
   </form>
 </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import {$eventBus} from '../app.js';
 
   export default{
-
     props:[
       'categories'
     ],
@@ -58,6 +58,9 @@ import axios from 'axios'
             console.log('Error');
         });
       },
-  }
-}
+      updateComponent(){
+        $eventBus.$emit('updateComponent');
+      }
+     },
+   }
 </script>

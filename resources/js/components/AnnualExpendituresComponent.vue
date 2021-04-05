@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div class="col" @updateComponent="update">
       <div class="panel panel-default">
         <div class="panel-body">
           <strong><p align="center">Yıllık Harcamalar</p></strong>
@@ -39,7 +39,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import {$eventBus} from '../app.js';
 
     export default{
       mounted(){
@@ -55,13 +56,21 @@ import axios from 'axios'
           annualExpenditures:null,
         }
       },
+      created(){
+        $eventBus.$on('updateComponent',this.update);
+      },
       methods:{
         loadAnnualExpenditures(){
           axios.get('/api/v1/annual-expenditures')
             .then((response)=>{
               this.annualExpenditures=response.data.data;
             })
-        }
+        },
+        update(){
+          setTimeout(()=>{
+            this.loadAnnualExpenditures();
+          },2000);
+        },
       },
    }
 </script>
