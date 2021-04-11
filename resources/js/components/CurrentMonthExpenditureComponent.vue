@@ -1,7 +1,7 @@
 <template>
   <div class="container" @updateComponent="update">
     <div class="row">
-      <div class="col-md-12 col-md-offset-2">
+      <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
           <div class="panel-body">
             <p align="center"><strong>Bu Ay Yapılan Harcamalar</strong></p>

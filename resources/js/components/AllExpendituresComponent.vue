@@ -1,7 +1,7 @@
 <template>
   <div class="container" @updateComponent="update">
       <div class="row">
-        <div class="col-md-12 col-md-offset-0">
+        <div class="col-md-10 col-md-offset-1">
           <div class="panel panel-default">
             <div class="panel-body"><strong><p align="center">Tüm Harcamalar</p></strong></div>
             <tr height=50>
@@ -10,11 +10,11 @@
               <td align="center"  style="width:150px"><strong>Kategori</strong></strong></td>
               <td align="center"  style="width:150px"><strong>Tarih</strong></td>
             </tr>
-          <div v-for="allExpenditures in allExpenditures">
+          <div v-for="allExpenditures in allExpenditures.data">
               <tr>
                 <td align="center" style="width:150px">{{allExpenditures.total}}</td>
                 <td align="center" style="width:150px">{{allExpenditures.location}}</td>
-                <td align="center" style="width:150px">{{allExpenditures.category}}</td>
+                <td align="center" style="width:150px">{{allExpenditures.category.category_name}}</td>
                 <td align="center"  style="width:150px">{{allExpenditures.date}}</td>
               </tr>
            </div>
@@ -30,7 +30,7 @@
 <script>
 import axios from 'axios';
 import {$eventBus} from '../app.js';
-Vue.component('pagination', require('laravel-vue-pagination'));
+import Pagination from 'vue-pagination-2';
 
    export default{
      mounted(){
@@ -47,19 +47,16 @@ Vue.component('pagination', require('laravel-vue-pagination'));
        $eventBus.$on('updateComponent',this.update);
      },
      methods:{
-       getResults(page){
-         if (typeof page === 'undefined') {
-                   page = 1;
-               }
-         axios.get('/api/v1/all-expenditures?page='+page)
-           .then(response=>{
-             this.allExpenditures=response.data;
+       getResults(page=1){
+         axios.get('/api/v1/all-expenditures?page=' + page)
+           .then(response => {
+             this.allExpenditures=response.data.data;
            });
        },
        loadAllExpenditures() {
          axios.get('/api/v1/all-expenditures')
            .then((response)=>{
-             this.allExpenditures=response.data;
+             this.allExpenditures=response.data.data;
            })
            .catch((error) => {
              console.log('Error: ', error);

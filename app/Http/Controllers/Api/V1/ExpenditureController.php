@@ -14,16 +14,6 @@ use Carbon\Carbon;
 
 class ExpenditureController extends Controller
 {
-      public function mainExpenditure()
-      {
-           $mainExpenditure=Expenditure::with('Category')
-                            ->orderBy('date','desc')
-                            ->get();
-
-           return response()->json([
-             'data'=>$mainExpenditure,
-           ]);
-      }
 
       public function maxExpenditure()
       {
@@ -83,26 +73,26 @@ class ExpenditureController extends Controller
         ]);
       }
 
-      public function expenditureLocations()
+      public function expenditureLocationCount()
       {
-          $expenditureLocations=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('COUNT(*) as number_of_expenditures'),\DB::raw('location'))
+          $expenditureLocationCount=Expenditure::select(\DB::raw('YEAR(date) year'),\DB::raw('COUNT(*) as number_of_expenditures'),\DB::raw('location'))
                           ->groupBy('year','location')
                           ->get();
 
           Return response()->json([
-            'data'=>$expenditureLocations,
+            'data'=>$expenditureLocationCount,
           ]);
       }
 
-      public function actualExpenditures()
+      public function currentMonthExpenditure()
       {
-          $actualExpenditures=Expenditure::with('Category')
+          $currentMonthExpenditure=Expenditure::with('Category')
                           ->whereYear('date', Carbon::now()->year)
                           ->whereMonth('date', Carbon::now()->month)
                           ->get();
 
           Return response()->json([
-            'data'=>$actualExpenditures,
+            'data'=>$currentMonthExpenditure,
           ]);
       }
 
@@ -120,6 +110,7 @@ class ExpenditureController extends Controller
       public function allExpenditures()
       {
         $allExpenditures=Expenditure::with('Category')
+                        ->orderBy('created_at','DESC')
                         ->paginate(5);
 
         Return response()->json([
@@ -127,7 +118,7 @@ class ExpenditureController extends Controller
         ]);
       }
 
-      public function createExpenditures(Request $request)
+      public function createExpenditure(Request $request)
       {
           $this->validate($request, [
              'total' => 'required|numeric',
