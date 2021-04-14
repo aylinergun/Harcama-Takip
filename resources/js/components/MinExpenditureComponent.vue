@@ -6,7 +6,7 @@
             <div align="center">
               <div class="if" v-if="minExpenditure !== null">
                 <label>Ay:</label>
-                  {{minExpenditure.month}}
+                  {{monthName(minExpenditure.month)}}
                 <label>TUTAR:</label>
                   {{minExpenditure.total}}
             </div>
@@ -19,6 +19,7 @@
 <script>
   import axios from 'axios';
   import {$eventBus} from '../app.js';
+  import moment from 'moment';
 
     export default{
       mounted(){
@@ -49,6 +50,24 @@
         setTimeout(() => {
           this.loadMinExpenditure();
         }, 2000);
+      },
+      monthName(minExpenditure){
+        var months =
+        [" " ,
+          "Ocak" ,
+          "Şubat" ,
+          "Mart" ,
+          "Nisan" ,
+          "Mayıs" ,
+          "Haziran" ,
+          "Temmuz" ,
+          "Ağustos" ,
+          "Eylül" ,
+          "Ekim" ,
+          "Kasım" ,
+          "Aralık"
+        ];
+      return months[minExpenditure];
       },
     },
   }

@@ -6,7 +6,7 @@
           <div align="center">
             <div class="if" v-if="maxExpenditure !== null ">
                 <label>Ay:</label>
-                  {{maxExpenditure.month}}
+                  {{monthName(maxExpenditure.month)}}
                 <label>TUTAR:</label>
                   {{maxExpenditure.total}}
             </div>
@@ -19,6 +19,7 @@
 <script>
 import axios from 'axios';
 import {$eventBus} from '../app.js';
+import moment from 'moment';
 
     export default{
       mounted(){
@@ -46,6 +47,24 @@ import {$eventBus} from '../app.js';
           setTimeout(()=>{
             this.loadMaxExpenditure();
           },2000);
+        },
+        monthName(maxExpenditure){
+          var months =
+          [" " ,
+            "Ocak" ,
+            "Şubat" ,
+            "Mart" ,
+            "Nisan" ,
+            "Mayıs" ,
+            "Haziran" ,
+            "Temmuz" ,
+            "Ağustos" ,
+            "Eylül" ,
+            "Ekim" ,
+            "Kasım" ,
+            "Aralık"
+          ];
+          return months[maxExpenditure];
         },
       },
     }

@@ -20,10 +20,9 @@
                         <div v-for="annualExpenditures in annualExpenditures">
                           <div v-if="annualExpenditures.year==year.value">
                    Ay:
-                   {{annualExpenditures.month}}
+                   {{monthName(annualExpenditures.month)}}
 
-                 Yapılan Toplam Harcama:
-                  {{annualExpenditures.total}}
+               <td>Yapılan Toplam Harcama: {{annualExpenditures.total}}</td>
 
                   Harcama Sayısı:
                   {{annualExpenditures.number_of_expenditures}}
@@ -41,6 +40,7 @@
 <script>
 import axios from 'axios';
 import {$eventBus} from '../app.js';
+import moment from 'moment';
 
     export default{
       mounted(){
@@ -70,6 +70,24 @@ import {$eventBus} from '../app.js';
           setTimeout(()=>{
             this.loadAnnualExpenditures();
           },2000);
+        },
+        monthName(annualExpenditures){
+          var months =
+          [" " ,
+            "Ocak" ,
+            "Şubat" ,
+            "Mart" ,
+            "Nisan" ,
+            "Mayıs" ,
+            "Haziran" ,
+            "Temmuz" ,
+            "Ağustos" ,
+            "Eylül" ,
+            "Ekim" ,
+            "Kasım" ,
+            "Aralık"
+          ];
+        return months[annualExpenditures];
         },
       },
    }

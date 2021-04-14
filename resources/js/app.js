@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 require('./bootstrap');
+var moment = require('moment');
+//moment().format();
 
 window.Vue = require('vue').default;
 
@@ -34,7 +36,6 @@ Vue.component('create-expenditure', require('./components/CreateExpenditureCompo
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 //eventBus tanimi yapilmasi gerekiyor
-import Vue from 'vue'
 export const $eventBus=new Vue();
 
 const app = new Vue({
