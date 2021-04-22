@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ExpenditureCollection;
 
 use Carbon\Carbon;
+use Mail;
 
 class ExpenditureController extends Controller
 {
@@ -134,6 +135,11 @@ class ExpenditureController extends Controller
            $expenditure->date = $request->date;
 
            $expenditure->save();
+
+           Mail::send('emails.expenditureCreated',$expenditure->toArray(),function($message){
+             $message->to('aylinergun@yahoo.com' , 'Harcama Takip')
+                    ->subject('Yeni Harcama Eklendi !');
+           });
 
            Return response()->json([
              'data'=>$expenditure,
