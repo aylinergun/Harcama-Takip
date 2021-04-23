@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Controllers\HomeController;
+use Controllers\ExpenditureController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','App\Http\Controllers\HomeController@index')->name('add');
+Auth::routes();
+Route::resource('expenditures','App\Http\Controllers\ExpenditureController');
+
+Route::prefix('api')->group(function() {
+    Route::resource('expenditures', 'App\Http\Controllers\Api\V1\ExpenditureController');
 });
