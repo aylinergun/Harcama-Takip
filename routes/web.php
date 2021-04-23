@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Controllers\HomeController;
 use Controllers\ExpenditureController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +14,10 @@ use Controllers\ExpenditureController;
 |
 */
 
-Route::get('/','App\Http\Controllers\HomeController@addExpenditures')->name('add');
-
-Route::get('/list','App\Http\Controllers\HomeController@listExpenditures')->name('show');
-
+Route::get('/','App\Http\Controllers\HomeController@index')->name('add');
 Auth::routes();
-
 Route::resource('expenditures','App\Http\Controllers\ExpenditureController');
+
+Route::prefix('api')->group(function() {
+    Route::resource('expenditures', 'App\Http\Controllers\Api\V1\ExpenditureController');
+});
