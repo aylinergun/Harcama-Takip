@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Expenditure;
 use App\Models\Category;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Resources\ExpenditureCollection;
-
 use Carbon\Carbon;
-use Mail;
+//use Mail;
+use App\Models\User;
+use App\Notifications\NewMessage;
 
 class ExpenditureController extends Controller
 {
@@ -69,6 +68,7 @@ class ExpenditureController extends Controller
                           ->groupBy('year')
                           ->orderBy('year')
                           ->get();
+
         Return response()->json([
           'data'=>$totalExpenditureYearly,
         ]);
@@ -136,10 +136,8 @@ class ExpenditureController extends Controller
 
            $expenditure->save();
 
-           Mail::send('emails.expenditureCreated',$expenditure->toArray(),function($message){
-             $message->to('aylinergun@yahoo.com' , 'Harcama Takip')
-                    ->subject('Yeni Harcama Eklendi !');
-           });
+           $user=User::find(1);
+           $user->notify(new NewMessage($expenditure));
 
            Return response()->json([
              'data'=>$expenditure,
